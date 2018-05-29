@@ -24,7 +24,7 @@ public class CatCommandRunner implements CommandRunner {
             return;
         }
         try {
-            List<String> lines = Files.readAllLines(Paths.get(argument));
+            List<String> lines = Files.readAllLines(environment.getFilePath(argument));
             environment.writeResult("");
             StringBuilder result = new StringBuilder();
             for (String line: lines) {

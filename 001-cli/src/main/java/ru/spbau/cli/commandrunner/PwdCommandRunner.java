@@ -12,7 +12,7 @@ public class PwdCommandRunner implements CommandRunner {
      */
     @Override
     public void run(Environment environment, String argument) {
-        String currentDirectory = System.getProperty("user.dir");
+        String currentDirectory = environment.getCurrentDirectory().toString();
         environment.writeResult(currentDirectory);
     }
 

@@ -22,7 +22,7 @@ public class WcCommandRunner implements CommandRunner {
             data = environment.getResult().getBytes();
         } else {
             try {
-                data = Files.readAllBytes(Paths.get(argument));
+                data = Files.readAllBytes(environment.getFilePath(argument));
             } catch (IOException e) {
                 environment.writeResult("0 0 0");
                 return;

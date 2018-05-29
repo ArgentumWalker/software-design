@@ -19,7 +19,6 @@ public class CLITest {
     }
 
     @Test
-
     public void wcCommandTest() throws IOException {
         //Windows and Unix newliners
         String expected1 = INVITATION + "172 709 5299" + NEWLINE + INVITATION_NEWLINE;
@@ -66,5 +65,26 @@ public class CLITest {
         String expected = INVITATION + "123" + NEWLINE + INVITATION_NEWLINE;
         String actual = execute("echo 123 | cat\nexit");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void lsCommandTest() throws IOException {
+        String actual = execute("ls\nexit");
+        assertTrue(actual.contains("build.gradle"));
+        assertTrue(actual.contains("src"));
+    }
+
+    @Test
+    public void cdCommandTest() throws IOException {
+        String actual = execute("cd src\nls\nexit");
+        assertTrue(actual.contains("main"));
+        assertTrue(actual.contains("test"));
+
+        actual = execute("cd src\\test\nls\nexit");
+        assertTrue(actual.contains("java"));
+
+        actual = execute("cd src\\test\\..\\..\\.\nls\nexit");
+        assertTrue(actual.contains("build.gradle"));
+        assertTrue(actual.contains("src"));
     }
 }
